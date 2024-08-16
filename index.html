@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Distribution Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 20px;
+            padding: 0;
+            text-align: center;
+        }
+
+        .result {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .result p {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        .result p strong {
+            color: #007BFF;
+        }
+    </style>
+</head>
+<body>
+    <div id="output"></div>
+
+    <script>
+        let x = +prompt("Enter a number");
+        let hasWife = confirm("هل انت عندك زوجه؟");
+        let boys = +prompt("Enter the number of boys");
+        let girls = +prompt("Enter the number of girls");
+        let remainingAmount = 0;
+        let wifeShare = 0;
+
+        if (hasWife) {
+            if (boys + girls === 0) {
+                wifeShare = x * 0.25;  
+            } else {
+                wifeShare = x * 0.125;
+            }
+        }
+
+        remainingAmount = x - wifeShare;
+
+        let output = document.getElementById("output");
+
+        if (boys + girls === 0) {
+            output.innerHTML = "<p>The number of boys and girls cannot be zero.</p>";
+        } else {
+            let sharePerPerson = remainingAmount / (boys + girls);
+            output.innerHTML = `
+                <div class="result">
+                    <p><strong>نصيب الولد:</strong> ${(sharePerPerson * 2).toFixed(2)}</p>
+                    <p><strong>نصيب البنت:</strong> ${sharePerPerson.toFixed(2)}</p>
+                    <p><strong>نصيب الزوجه:</strong> ${wifeShare.toFixed(2)}</p>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>
